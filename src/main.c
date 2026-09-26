@@ -1,5 +1,8 @@
+#define _POSIX_C_SOURCE 200809L
+
 #include "parser.h"
 #include "serial.h"
+#include "devices.h"
 
 #include <errno.h>
 #include <signal.h>
@@ -29,79 +32,125 @@ int main(int argc, char *argv[]) {
     printf("Stop bits: %d\n", config.stop_bits);
     */
 
-    serial_port_t port;
+    if (config.mode == MODE_SCAN) {
+        serial_device_info_t devices[MAX_SERIAL_DEVICES];
+        size_t device_count = 0;
 
-    if (serial_start_connection(&port, &config) != 0) {
-        perror("serial_start_connection");
-        return 1;
-    }
+        printf("Scanning for serial devices...\n\n");
 
-    printf("Connected to %s\n", config.device);
+        if (find_serial_devices(
+                config.device_type,
+                devices,
+                MAX_SERIAL_DEVICES,
+                &device_count
+            ) != 0) {
 
-    /*
-     * Handle Ctrl+C (SIGINT).
-     */
-    struct sigaction sa = {0};
+            perror("find_serial_devices");
+            return 1;
+        }
 
-    sa.sa_handler = handle_signal;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = 0;
-
-    if (sigaction(SIGINT, &sa, NULL) != 0) {
-        perror("sigaction");
-        serial_end_connection(&port);
-        return 1;
-    }
-
-    char buffer[256];
-
-    while (running) {
-        fd_set read_fds;
-        FD_ZERO(&read_fds);
-        FD_SET(port.fd, &read_fds);
-
-        int result = select(
-            port.fd + 1, 
-            &read_fds, 
-            NULL, 
-            NULL, 
-            NULL
+        printf(
+            "%-15s %-20s %-30s %-20s\n",
+            "PORT",
+            "PRODUCENT",
+            "MODEL",
+            "SERIAL"
         );
 
-        if (result < 0) {
-            if (errno == EINTR) {
-                // Interrupted by signal, continue
-                continue;
-            }
-            perror("select");
-            break;
+        printf(
+            "%-15s %-20s %-30s %-20s\n",
+            "---------------",
+            "--------------------",
+            "------------------------------",
+            "--------------------"
+        );
+
+        for (size_t i = 0; i < device_count; i++) {
+            printf(
+                "%-15s %-20s %-30s %-20s\n",
+                devices[i].port,
+                devices[i].vendor,
+                devices[i].model,
+                devices[i].serial
+            );
+        }
+        
+    }
+    else {
+        serial_port_t port;
+
+        if (serial_start_connection(&port, &config) != 0) {
+            perror("serial_start_connection");
+            return 1;
         }
 
-        if (FD_ISSET(port.fd, &read_fds)) {
-            ssize_t bytes_read = serial_read(
-                &port, 
-                buffer, 
-                sizeof(buffer)
+        printf("Connected to %s\n", config.device);
+
+        /*
+        * Handle Ctrl+C (SIGINT).
+        */
+        struct sigaction sa = {0};
+
+        sa.sa_handler = handle_signal;
+        sigemptyset(&sa.sa_mask);
+        sa.sa_flags = 0;
+
+        if (sigaction(SIGINT, &sa, NULL) != 0) {
+            perror("sigaction");
+            serial_end_connection(&port);
+            return 1;
+        }
+
+        char buffer[256];
+
+        while (running) {
+            fd_set read_fds;
+            FD_ZERO(&read_fds);
+            FD_SET(port.fd, &read_fds);
+
+            int result = select(
+                port.fd + 1, 
+                &read_fds, 
+                NULL, 
+                NULL, 
+                NULL
             );
 
-            if (bytes_read > 0) {
-                fwrite(buffer, 1, bytes_read, stdout);
-                fflush(stdout);
-            } else if (bytes_read < 0 &&
-                    errno != EAGAIN && 
-                    errno != EWOULDBLOCK) {
-                perror("serial_read");
+            if (result < 0) {
+                if (errno == EINTR) {
+                    // Interrupted by signal, continue
+                    continue;
+                }
+                perror("select");
                 break;
             }
+
+            if (FD_ISSET(port.fd, &read_fds)) {
+                ssize_t bytes_read = serial_read(
+                    &port, 
+                    buffer, 
+                    sizeof(buffer)
+                );
+
+                if (bytes_read > 0) {
+                    fwrite(buffer, 1, bytes_read, stdout);
+                    fflush(stdout);
+                } else if (bytes_read < 0 &&
+                        errno != EAGAIN && 
+                        errno != EWOULDBLOCK) {
+                    perror("serial_read");
+                    break;
+                }
+            }
         }
+
+        printf("\nClosing connection...\n");
+
+        if (serial_end_connection(&port) != 0) {
+            perror("serial_end_connection");
+            return 1;
+        }
+
     }
-
-    printf("\nClosing connection...\n");
-
-    if (serial_end_connection(&port) != 0) {
-        perror("serial_end_connection");
-        return 1;
-    }
-
     return 0;
 }

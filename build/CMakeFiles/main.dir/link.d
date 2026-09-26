@@ -5,6 +5,8 @@ serial-reader: \
   CMakeFiles/main.dir/src/main.c.o \
   CMakeFiles/main.dir/src/parser.c.o \
   CMakeFiles/main.dir/src/serial.c.o \
+  CMakeFiles/main.dir/src/devices.c.o \
+  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libsystemd.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
@@ -38,6 +40,8 @@ serial-reader: \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o \
+  /usr/lib64/libm.so.6 \
+  /lib64/libgcc_s.so.1 \
   /lib64/ld-linux-x86-64.so.2
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o:
@@ -51,6 +55,10 @@ CMakeFiles/main.dir/src/main.c.o:
 CMakeFiles/main.dir/src/parser.c.o:
 
 CMakeFiles/main.dir/src/serial.c.o:
+
+CMakeFiles/main.dir/src/devices.c.o:
+
+/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libsystemd.so:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
 
@@ -117,5 +125,9 @@ CMakeFiles/main.dir/src/serial.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o:
+
+/usr/lib64/libm.so.6:
+
+/lib64/libgcc_s.so.1:
 
 /lib64/ld-linux-x86-64.so.2:

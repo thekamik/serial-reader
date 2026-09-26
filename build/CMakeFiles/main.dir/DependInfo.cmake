@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/kamil/Projects/serial-reader/src/devices.c" "CMakeFiles/main.dir/src/devices.c.o" "gcc" "CMakeFiles/main.dir/src/devices.c.o.d"
   "/home/kamil/Projects/serial-reader/src/main.c" "CMakeFiles/main.dir/src/main.c.o" "gcc" "CMakeFiles/main.dir/src/main.c.o.d"
   "/home/kamil/Projects/serial-reader/src/parser.c" "CMakeFiles/main.dir/src/parser.c.o" "gcc" "CMakeFiles/main.dir/src/parser.c.o.d"
   "/home/kamil/Projects/serial-reader/src/serial.c" "CMakeFiles/main.dir/src/serial.c.o" "gcc" "CMakeFiles/main.dir/src/serial.c.o.d"

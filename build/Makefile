@@ -129,6 +129,30 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+src/devices.o: src/devices.c.o
+.PHONY : src/devices.o
+
+# target to build an object file
+src/devices.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/devices.c.o
+.PHONY : src/devices.c.o
+
+src/devices.i: src/devices.c.i
+.PHONY : src/devices.i
+
+# target to preprocess a source file
+src/devices.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/devices.c.i
+.PHONY : src/devices.c.i
+
+src/devices.s: src/devices.c.s
+.PHONY : src/devices.s
+
+# target to generate assembly for a file
+src/devices.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/devices.c.s
+.PHONY : src/devices.c.s
+
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
@@ -210,6 +234,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
+	@echo "... src/devices.o"
+	@echo "... src/devices.i"
+	@echo "... src/devices.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

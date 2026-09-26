@@ -22,12 +22,13 @@ CMakeFiles/main.dir/src/main.c.o: \
  /usr/include/bits/pthreadtypes-arch.h \
  /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
  /usr/include/bits/struct_rwlock.h \
- /home/kamil/Projects/serial-reader/include/parser.h /usr/include/errno.h \
- /usr/include/bits/errno.h /usr/include/linux/errno.h \
- /usr/include/asm/errno.h /usr/include/asm-generic/errno.h \
- /usr/include/asm-generic/errno-base.h /usr/include/signal.h \
- /usr/include/bits/signum-generic.h /usr/include/bits/signum-arch.h \
- /usr/include/bits/types/sig_atomic_t.h \
+ /home/kamil/Projects/serial-reader/include/parser.h \
+ /home/kamil/Projects/serial-reader/include/devices.h \
+ /usr/include/errno.h /usr/include/bits/errno.h \
+ /usr/include/linux/errno.h /usr/include/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/include/signal.h /usr/include/bits/signum-generic.h \
+ /usr/include/bits/signum-arch.h /usr/include/bits/types/sig_atomic_t.h \
  /usr/include/bits/types/siginfo_t.h /usr/include/bits/types/__sigval_t.h \
  /usr/include/bits/siginfo-arch.h /usr/include/bits/siginfo-consts.h \
  /usr/include/bits/types/sigval_t.h /usr/include/bits/types/sigevent_t.h \
