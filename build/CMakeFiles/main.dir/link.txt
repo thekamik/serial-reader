@@ -1,1 +1,0 @@
-/usr/lib64/ccache/cc -Wl,--dependency-file=CMakeFiles/main.dir/link.d CMakeFiles/main.dir/src/main.c.o CMakeFiles/main.dir/src/parser.c.o CMakeFiles/main.dir/src/serial.c.o CMakeFiles/main.dir/src/devices.c.o -o serial-reader  -lsystemd
