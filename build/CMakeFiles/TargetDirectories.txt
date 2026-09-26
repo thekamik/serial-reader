@@ -1,0 +1,3 @@
+/home/kamil/Projects/serial-reader/build/CMakeFiles/main.dir
+/home/kamil/Projects/serial-reader/build/CMakeFiles/edit_cache.dir
+/home/kamil/Projects/serial-reader/build/CMakeFiles/rebuild_cache.dir
